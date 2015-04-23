@@ -96,10 +96,15 @@ typedef NS_ENUM(NSInteger, RMPMenuBarControllerDirection){
  */
 @property (nonatomic, weak)id<RMPScrollingMenuBarControllerTransitionDelegate> transitionDelegate;
 
+@property (nonatomic, assign) BOOL isPresented;
+
 /** Setter of view controllers.
  */
 - (void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated;
 
+/** Menubar delegate public delegate
+ */
+- (void)menuBar:(RMPScrollingMenuBar*)menuBar didSelectItem:(RMPScrollingMenuBarItem*)item direction:(RMPScrollingMenuBarDirection)direction;
 
 @end
 
