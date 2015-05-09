@@ -28,11 +28,11 @@
 @implementation RMPScrollingMenuBarControllerTransition {
     __weak RMPScrollingMenuBarController* _menuBarController;
     RMPScrollingMenuBarControllerAnimator* _animator;
-
+    
     UIPanGestureRecognizer* _panGesture;
-
+    
     RMPScrollingMenuBarControllerInteractionController* _interactionController;
-
+    
     RMPMenuBarControllerDirection _direction;
 }
 
@@ -142,7 +142,7 @@
 @implementation RMPScrollingMenuBarControllerInteractionController {
     id<UIViewControllerAnimatedTransitioning> _animator;
     id<UIViewControllerContextTransitioning> _context;
-
+    
     CADisplayLink* _displayLink;
     
     RMPScrollingMenuBarControllerInteractionControllerCancelCompletionBlock _completion;
@@ -183,13 +183,13 @@
 - (void)finishInteractiveTransition
 {
     _context.containerView.layer.speed = self.completionSpeed;
-
+    
     CFTimeInterval pausedTimeOffset = _context.containerView.layer.timeOffset;
     _context.containerView.layer.timeOffset = 0.0;
     _context.containerView.layer.beginTime = 0.0;
     CFTimeInterval newBeginTime = [_context.containerView.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTimeOffset;
     _context.containerView.layer.beginTime = newBeginTime;
-
+    
     [_context finishInteractiveTransition];
 }
 
@@ -209,10 +209,10 @@
     NSTimeInterval timeOffset = _context.containerView.layer.timeOffset - _displayLink.duration*0.3;
     if(timeOffset < 0){
         // Completed rollback.
-
+        
         [_displayLink invalidate];
         _displayLink = nil;
-
+        
         _context.containerView.layer.speed = self.completionSpeed;
         _context.containerView.layer.timeOffset = 0.0;
         
@@ -222,7 +222,7 @@
         [toViewController.view.layer removeAllAnimations];
         UIViewController* fromViewController = [_context viewControllerForKey:UITransitionContextFromViewControllerKey];
         [fromViewController.view.layer removeAllAnimations];
-
+        
         [_context cancelInteractiveTransition];
         
         if(_completion){
@@ -244,7 +244,7 @@
     RMPScrollingMenuBarControllerAnimator* _animator;
     RMPScrollingMenuBarControllerTransitionContextCompletionBlock _completion;
     BOOL _isCancelled;
-
+    
     CGRect _appearingToRect;
     CGRect _appearingFromRect;
     CGRect _disappearingToRect;
@@ -275,7 +275,7 @@
         _animator = animator;
         _completion = [completion copy];
         _isCancelled = NO;
-
+        
         CGFloat offset = _containerView.bounds.size.width;
         offset *= (_direction == RMPScrollingMenuBarControllerDirectionRight) ? -1 : 1;
         _disappearingFromRect = _appearingToRect = _containerView.bounds;
@@ -329,7 +329,7 @@
     if(_completion){
         _completion(didComplete);
     }
-
+    
     if ([_animator respondsToSelector:@selector (animationEnded:)]) {
         [_animator animationEnded:didComplete];
     }

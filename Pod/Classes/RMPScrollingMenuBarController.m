@@ -90,10 +90,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillLayoutSubviews
-{
+- (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    
     CGRect rect;
     rect = CGRectMake(0, [self.topLayoutGuide length], self.view.bounds.size.width, _menuBar.barHeight);
     _menuBar.frame = rect;
@@ -102,8 +100,6 @@
                       self.view.bounds.size.width,
                       self.view.bounds.size.height - CGRectGetMaxY(_menuBar.frame));
     _containerView.frame = rect;
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -169,8 +165,15 @@
 }
 
 #pragma mark - Private
-- (void)transitionToViewController:(UIViewController*)toViewController
-{
+- (void)transitionToViewController:(UIViewController*)toViewController{
+    if(_delegate){
+        if([_delegate respondsToSelector:@selector(menuBarController:prepareForTransitionToViewController:)]){
+            [_delegate menuBarController:self prepareForTransitionToViewController:toViewController];
+        }
+    }
+    if(_doNotTransition){
+        return;
+    }
     UIViewController *fromViewController = _selectedViewController;
     // Do nothing if toViewController equals to fromViewController.
     if (toViewController == fromViewController || !_containerView) {

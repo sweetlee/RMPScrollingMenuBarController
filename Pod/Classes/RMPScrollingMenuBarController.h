@@ -37,6 +37,9 @@ typedef NS_ENUM(NSInteger, RMPMenuBarControllerDirection){
  */
 - (void)menuBarController:(RMPScrollingMenuBarController*)menuBarController willSelectViewController:(UIViewController*)viewController;
 
+/** The delegate method called when the transition is about to start
+ */
+- (void)menuBarController:(RMPScrollingMenuBarController *)menuBarController prepareForTransitionToViewController:(UIViewController *)viewController;
 /** The delegate method which be called after select menu item.
  */
 - (void)menuBarController:(RMPScrollingMenuBarController*)menuBarController didSelectViewController:(UIViewController*)viewController;
@@ -97,6 +100,8 @@ typedef NS_ENUM(NSInteger, RMPMenuBarControllerDirection){
 @property (nonatomic, weak)id<RMPScrollingMenuBarControllerTransitionDelegate> transitionDelegate;
 
 @property (nonatomic, assign) BOOL isPresented;
+@property (nonatomic, assign) BOOL doNotTransition;
+
 
 /** Setter of view controllers.
  */
