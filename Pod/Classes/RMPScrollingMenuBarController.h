@@ -48,6 +48,10 @@ typedef NS_ENUM(NSInteger, RMPMenuBarControllerDirection){
  */
 - (void)menuBarController:(RMPScrollingMenuBarController*)menuBarController didCancelViewController:(UIViewController*)viewController;
 
+/** The delegate method called when the + button is tapped
+ */
+- (void) menubarcontroller:(RMPScrollingMenuBarController*) menuBarController addRoomBtnTapped:(id) sender;
+
 /** The delegate method which be called when set up menu bar items dynamically.
  */
 - (RMPScrollingMenuBarItem*)menuBarController:(RMPScrollingMenuBarController*)menuBarController menuBarItemAtIndex:(NSInteger)index;

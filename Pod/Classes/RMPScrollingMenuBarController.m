@@ -74,8 +74,8 @@
     
     _isPresented = NO;
     
+    [self updateMenuBarWithViewControllers:_viewControllers animated:NO];
     if([_viewControllers count] > 0){
-        [self updateMenuBarWithViewControllers:_viewControllers animated:NO];
         [self setSelectedViewController:_viewControllers[0]];
     }
 }
@@ -143,9 +143,24 @@
         [items addObject:item];
         i++;
     }
+    // Add + btn to add room
+    item = [RMPScrollingMenuBarItem item];
+    item.title = @"+";
+    item.tag = (-1);
+    [[item button] addTarget:self action:@selector(addRoomBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [items addObject:item];
     _items = [NSArray arrayWithArray:items];
     
     [_menuBar setItems:_items animated:animated];
+}
+
+- (void) addRoomBtnTapped:(id) sender{
+    NSLog(@"+ tapped");
+    if(_delegate){
+        if([_delegate respondsToSelector:@selector(menubarcontroller:addRoomBtnTapped:)]){
+            [_delegate menubarcontroller:self addRoomBtnTapped:sender];
+        }
+    }
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController

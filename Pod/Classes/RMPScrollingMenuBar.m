@@ -206,10 +206,10 @@
             view.frame = f;
             view.alpha = 0.0;
             [_scrollView addSubview:view];
-            
-            [(RMPScrollingMenuBarButton*)view addTarget:self
-                                                 action:@selector(didTapMenuButton:)
-                                       forControlEvents:UIControlEventTouchUpInside];
+            if(item.tag != -1)
+                [(RMPScrollingMenuBarButton*)view addTarget:self
+                                                     action:@selector(didTapMenuButton:)
+                                           forControlEvents:UIControlEventTouchUpInside];
             
         }
     }
@@ -247,9 +247,19 @@
         }
     }
     
-    if(!_selectedItem && _items.count > 0){
+    if(!_selectedItem && _items.count > 0 && ![self isAddButton]){
         [self setSelectedItem:_items[0]];
     }
+}
+
+- (BOOL) isAddButton{
+    if(_items.count == 1){
+        RMPScrollingMenuBarItem* item = [_items firstObject];
+        if(item.tag == (-1)){
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)setupMenuBarButtonsForInfinitePagingStyle:(BOOL)animated
