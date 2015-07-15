@@ -144,11 +144,11 @@
         i++;
     }
     // Add + btn to add room
-    item = [RMPScrollingMenuBarItem item];
-    item.title = @"+";
-    item.tag = (-1);
-    [[item button] addTarget:self action:@selector(addRoomBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [items addObject:item];
+    _addButton  = [RMPScrollingMenuBarItem item];
+    _addButton.title = @"+";
+    _addButton.tag = (-1);
+    [[_addButton button] addTarget:self action:@selector(addRoomBtnTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [items addObject:_addButton];
     _items = [NSArray arrayWithArray:items];
     
     [_menuBar setItems:_items animated:animated];

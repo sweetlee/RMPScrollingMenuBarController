@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, RMPMenuBarControllerDirection){
 
 @property (nonatomic, assign) BOOL isPresented;
 @property (nonatomic, assign) BOOL doNotTransition;
-
+@property (nonatomic, strong) RMPScrollingMenuBarItem* addButton;
 
 /** Setter of view controllers.
  */
